@@ -1,0 +1,11 @@
+<%= simple_form_for(@product, html: { class: 'form-horizontal' }) do |p| %>
+  <%= p.input :name %>
+  <%= p.input :description %>
+  <%= p.input :img_link %>
+
+  <% @providers.each do |prov| %>
+   <%= p.association :providers %>
+  <% end %>
+
+  <%= p.submit class: "btn btn-success" %>
+<% end %>

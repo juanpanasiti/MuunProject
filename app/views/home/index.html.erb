@@ -1,0 +1,57 @@
+<h1>Proveedores</h1>
+
+<table class="table table-striped table-hover table-responsive">
+  <thead class="thead-inverse">
+    <tr>
+      <th> Nombre </th>
+      <th> Dirección </th>
+      <th> Dólar </th>
+      <th> Imp. Int. </th>
+      <th> Opciones </th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @providers.each do |p| %>
+      <tr>
+        <td> <%= link_to p.name, p.web, target: :_blank %> </td>
+        <td> <%= p.address %> </td>
+        <td> <%= p.dollar_price %> </td>
+        <td> <%= p.tax %> </td>
+        <td>
+          <%= link_to fa_icon("pencil"), edit_provider_path(p), class: "badge badge-warning" %>
+          <%= link_to fa_icon("times"), p, method: :delete, data: { confirm: 'Seguro?' }, class: "badge badge-danger" %>
+        </td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+<%= link_to fa_icon("plus", text: "Nuevo"), new_provider_path, class: "btn btn-primary" %>
+
+<h1>Productos</h1>
+
+<table class="table table-striped table-hover table-responsive">
+  <thead class="thead-inverse">
+    <tr>
+      <th> Nombre </th>
+      <% @providers.each do |p| %>
+      <th> <%= p.name %> </th>
+      <% end %>
+      <th> Opciones </th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @products.each do |i| %>
+      <tr>
+        <td> <%= i.name %> </td>
+        <% @providers.each do |p| %>
+        <td> $ </td>
+        <% end %>
+        <td>
+          <%= link_to fa_icon("pencil"), edit_product_path(i), class: "badge badge-warning" %>
+          <%= link_to fa_icon("times"), i, method: :delete, data: { confirm: 'Seguro?' }, class: "badge badge-danger" %>
+        </td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+<%= link_to fa_icon("plus", text: "Nuevo"), new_product_path, class: "btn btn-primary" %>
