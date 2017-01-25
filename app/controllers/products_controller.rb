@@ -1,8 +1,12 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:update, :edit, :destroy]
   before_action :set_providers, only: [:update, :edit, :new, :create]
+  def index
+    #code
+  end
   def new
     @product = Product.new
+    @product.product_providers.build
   end
   def create
     @product = Product.new(product_params)
@@ -30,7 +34,7 @@ class ProductsController < ApplicationController
   end
   def destroy
     respond_to do |format|
-      if @product.delete
+      if @product.destroy
         format.html { redirect_to root_path, alert: 'Producto eliminado'}
       end
     end
@@ -40,7 +44,8 @@ class ProductsController < ApplicationController
   protected
 
   def product_params
-    params.require(:product).permit(:name, :description, :img_link, providers_ids: [])
+    params.require(:product).permit(:name, :description, :img_link, provider_ids: [],
+            product_providers_attributes: [:id, :product_id, :provider_id, :price, :iva, :_destroy])
   end
   def set_product
     @product = Product.find(params[:id])

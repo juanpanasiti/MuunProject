@@ -15,8 +15,8 @@
       <tr>
         <td> <%= link_to p.name, p.web, target: :_blank %> </td>
         <td> <%= p.address %> </td>
-        <td> <%= p.dollar_price %> </td>
-        <td> <%= p.tax %> </td>
+        <td> <%= "$ #{p.dollar_price}" %> </td>
+        <td> <%= "#{p.tax.to_i}%" %> </td>
         <td>
           <%= link_to fa_icon("pencil"), edit_provider_path(p), class: "badge badge-warning" %>
           <%= link_to fa_icon("times"), p, method: :delete, data: { confirm: 'Seguro?' }, class: "badge badge-danger" %>
@@ -44,7 +44,7 @@
       <tr>
         <td> <%= i.name %> </td>
         <% @providers.each do |p| %>
-        <td> $ </td>
+        <td> <%= i.get_price(p) %> </td>
         <% end %>
         <td>
           <%= link_to fa_icon("pencil"), edit_product_path(i), class: "badge badge-warning" %>

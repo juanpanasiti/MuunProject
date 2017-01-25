@@ -1,0 +1,12 @@
+<% @providers.each do |prov| %>
+<div class="">
+  <h5> <%= prov.name %> desde el new </h5>
+</div>
+  <%= p.fields_for :product_providers do |pp| %>
+  <%= pp.input :provider_id, as: :hidden, input_html: {value: prov.id} %>
+    <div class="row">
+      <%= pp.input :price %>
+      <%= pp.input :iva %>
+    </div>
+  <% end %>
+<% end %>
